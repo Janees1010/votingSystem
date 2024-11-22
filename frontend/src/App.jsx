@@ -14,6 +14,9 @@ const App = () => {
     );
     axios.post("http://localhost:4000/person/incriment-like",{name:name}).then((res)=>{
        console.log(res.data);
+       fetchPersons()
+    }).catch((err)=>{
+        console.log(err.message);
     })
   };
 
@@ -24,17 +27,21 @@ const App = () => {
       )
     );
     axios.post("http://localhost:4000/person/dicriment-like",{name:name}).then((res)=>{
-       console.log(res.data);
-       
+      console.log(res.data);
+      fetchPersons()
     }).catch(err=>console.log(err.message))
   }
 
-  useEffect(()=>{
+  const fetchPersons = ()=>{
     axios.get("http://localhost:4000/person").then((res)=>{
       setOptions(res.data)
     }).catch((err)=>{
         console.log(err.message);
     })
+  }
+
+  useEffect(()=>{
+      fetchPersons()
   },[])
   
   return (
