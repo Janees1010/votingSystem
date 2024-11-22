@@ -23,7 +23,10 @@ const App = () => {
         i === index ? { ...item, count: item.count === 0 ? item.count : item.count - 1} : item
       )
     );
-    axios.post("http://localhost:4000/person/dicriment-like",{name:name})
+    axios.post("http://localhost:4000/person/dicriment-like",{name:name}).then((res)=>{
+       console.log(res.data);
+       
+    }).catch(err=>console.log(err.message))
   }
 
   useEffect(()=>{
